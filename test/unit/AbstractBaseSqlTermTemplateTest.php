@@ -34,20 +34,6 @@ class AbstractBaseSqlTermTemplateTest extends TestCase
     }
 
     /**
-     * Creates a mock container instance.
-     *
-     * @since [*next-version*]
-     *
-     * @return MockObject
-     */
-    public function createContainer()
-    {
-        return $this->getMockBuilder('Psr\Container\ContainerInterface')
-                    ->setMethods(['get', 'has'])
-                    ->getMockForAbstractClass();
-    }
-
-    /**
      * Tests whether a valid instance of the test subject can be created.
      *
      * @since [*next-version*]
