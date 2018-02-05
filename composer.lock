@@ -499,12 +499,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Dhii/expression-renderer-abstract.git",
-                "reference": "b279f8bfb4250c2c151f6f7ea0563c8de0a91472"
+                "reference": "e8bf4aaa55f4294c5a1242cd69ccb58c11bff974"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Dhii/expression-renderer-abstract/zipball/b279f8bfb4250c2c151f6f7ea0563c8de0a91472",
-                "reference": "b279f8bfb4250c2c151f6f7ea0563c8de0a91472",
+                "url": "https://api.github.com/repos/Dhii/expression-renderer-abstract/zipball/e8bf4aaa55f4294c5a1242cd69ccb58c11bff974",
+                "reference": "e8bf4aaa55f4294c5a1242cd69ccb58c11bff974",
                 "shasum": ""
             },
             "require": {
@@ -543,7 +543,7 @@
                 }
             ],
             "description": "Abstract functionality for objects that can render expressions.",
-            "time": "2018-02-05T10:21:43+00:00"
+            "time": "2018-02-05T16:09:57+00:00"
         },
         {
             "name": "dhii/expression-renderer-base",
@@ -551,12 +551,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Dhii/expression-renderer-base.git",
-                "reference": "8368236758a564ef3d0645be1b77cddc7e90decd"
+                "reference": "617075fe4259036aae9c13df5c64a835c7bb299d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Dhii/expression-renderer-base/zipball/8368236758a564ef3d0645be1b77cddc7e90decd",
-                "reference": "8368236758a564ef3d0645be1b77cddc7e90decd",
+                "url": "https://api.github.com/repos/Dhii/expression-renderer-base/zipball/617075fe4259036aae9c13df5c64a835c7bb299d",
+                "reference": "617075fe4259036aae9c13df5c64a835c7bb299d",
                 "shasum": ""
             },
             "require": {
@@ -614,7 +614,7 @@
                 "source": "https://github.com/Dhii/expression-renderer-base/tree/task/initial-classes",
                 "issues": "https://github.com/Dhii/expression-renderer-base/issues"
             },
-            "time": "2018-02-02T12:41:50+00:00"
+            "time": "2018-02-05T12:58:38+00:00"
         },
         {
             "name": "dhii/expression-renderer-interface",
@@ -1013,12 +1013,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Dhii/sql-interface.git",
-                "reference": "13541ac960df52d9a1cdd523067253f7542af587"
+                "reference": "a4e2ab9d6ff4596de4a3f034bbeb6f0fc4d99356"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Dhii/sql-interface/zipball/13541ac960df52d9a1cdd523067253f7542af587",
-                "reference": "13541ac960df52d9a1cdd523067253f7542af587",
+                "url": "https://api.github.com/repos/Dhii/sql-interface/zipball/a4e2ab9d6ff4596de4a3f034bbeb6f0fc4d99356",
+                "reference": "a4e2ab9d6ff4596de4a3f034bbeb6f0fc4d99356",
                 "shasum": ""
             },
             "require": {
@@ -1055,7 +1055,7 @@
                 }
             ],
             "description": "Interfaces for SQL resource abstraction.",
-            "time": "2018-02-02T12:23:49+00:00"
+            "time": "2018-02-05T17:10:49+00:00"
         },
         {
             "name": "dhii/stringable-interface",
