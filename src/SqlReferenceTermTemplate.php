@@ -3,6 +3,7 @@
 namespace RebelCode\Expression\Renderer\Sql;
 
 use Dhii\Expression\TermInterface;
+use Dhii\Expression\VariableTermInterface;
 use Dhii\Storage\Resource\Sql\EntityFieldInterface;
 
 /**
@@ -28,7 +29,10 @@ class SqlReferenceTermTemplate extends AbstractBaseSqlTermTemplate
      */
     protected function _renderExpression(TermInterface $expression, $context = null)
     {
-        if (!($expression instanceof EntityFieldInterface)) {
+        $isVariable = $expression instanceof VariableTermInterface;
+        $isEntityField = $expression instanceof EntityFieldInterface;
+
+        if (!$isVariable && !$isEntityField) {
             throw $this->_createTemplateRenderException(
                 $this->__('Expression is not a valid SQL reference'),
                 null,
@@ -38,9 +42,19 @@ class SqlReferenceTermTemplate extends AbstractBaseSqlTermTemplate
             );
         }
 
-        $entity = $this->_resolveSqlAliasFromContext($expression->getEntity(), $context);
-        $field = $this->_resolveSqlAliasFromContext($expression->getField(), $context);
+        $field = $isEntityField
+            ? $expression->getField()
+            : $expression->getKey();
+        $fieldAliased = $this->_resolveSqlAliasFromContext($field, $context);
 
-        return sprintf('`%1$s`.`%2$s`', $entity, $field);
+        $render = sprintf('`%s`', $fieldAliased);
+
+        if ($isEntityField) {
+            $entity = $this->_resolveSqlAliasFromContext($expression->getEntity(), $context);
+
+            $render = sprintf('`%1$s`.%2$s', $entity, $render);
+        }
+
+        return $render;
     }
 }

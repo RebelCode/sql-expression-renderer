@@ -54,6 +54,18 @@ class SqlReferenceTemplateTest extends TestCase
     }
 
     /**
+     * Creates an entity field term instance.
+     *
+     * @since [*next-version*]
+     *
+     * @return MockObject
+     */
+    public function createVariableTerm()
+    {
+        return $this->getMock('Dhii\Expression\VariableTermInterface');
+    }
+
+    /**
      * Creates a mock that both extends a class and implements interfaces.
      *
      * This is particularly useful for cases where the mock is based on an
@@ -100,11 +112,33 @@ class SqlReferenceTemplateTest extends TestCase
     }
 
     /**
+     * Tests the render method to assert whether the variable term is correctly rendered.
+     *
+     * @since [*next-version*]
+     */
+    public function testRenderVariable()
+    {
+        $subject = $this->createInstance();
+
+        $varKey = uniqid('key-');
+
+        $term = $this->createVariableTerm();
+        $term->method('getKey')->willReturn($varKey);
+
+        $context = [SqlCtx::K_EXPRESSION => $term];
+
+        $expected = "`$varKey`";
+        $actual = $subject->render($context);
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
      * Tests the render method to assert whether the entity field term is correctly rendered.
      *
      * @since [*next-version*]
      */
-    public function testRender()
+    public function testRenderEntityField()
     {
         $subject = $this->createInstance();
 
