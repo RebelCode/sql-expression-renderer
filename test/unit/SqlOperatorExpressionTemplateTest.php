@@ -200,7 +200,7 @@ class SqlOperatorExpressionTemplateTest extends TestCase
         );
         $subject = new TestSubject($operator, $container);
 
-        $expected = "$render1 $operator $render2";
+        $expected = "($render1) $operator ($render2)";
         $actual = $subject->render($ctx);
 
         $this->assertEquals($expected, $actual);
