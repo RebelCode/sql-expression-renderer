@@ -509,12 +509,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Dhii/expression-renderer-base.git",
-                "reference": "f3f0bc0c803a1c481b5bf3bf779fe4ccc083828a"
+                "reference": "344733af8b01d32a967d6f1555b8243fd8a01e18"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Dhii/expression-renderer-base/zipball/f3f0bc0c803a1c481b5bf3bf779fe4ccc083828a",
-                "reference": "f3f0bc0c803a1c481b5bf3bf779fe4ccc083828a",
+                "url": "https://api.github.com/repos/Dhii/expression-renderer-base/zipball/344733af8b01d32a967d6f1555b8243fd8a01e18",
+                "reference": "344733af8b01d32a967d6f1555b8243fd8a01e18",
                 "shasum": ""
             },
             "require": {
@@ -570,7 +570,7 @@
                 "source": "https://github.com/Dhii/expression-renderer-base/tree/task/initial-classes",
                 "issues": "https://github.com/Dhii/expression-renderer-base/issues"
             },
-            "time": "2018-04-09T18:45:23+00:00"
+            "time": "2018-04-09T18:56:18+00:00"
         },
         {
             "name": "dhii/expression-renderer-interface",
