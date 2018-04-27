@@ -122,6 +122,31 @@ class SqlLiteralTermTemplateTest extends TestCase
     }
 
     /**
+     * Tests the render method to assert whether the literal term in the context has array values correctly rendered.
+     *
+     * @since [*next-version*]
+     */
+    public function testRenderArray()
+    {
+        $subject = $this->createInstance();
+
+        $value = [
+            $value1 = uniqid('value'),
+            $value2 = uniqid('value'),
+        ];
+
+        $term = $this->createLiteralTerm();
+        $term->method('getValue')->willReturn($value);
+
+        $context = [SqlCtx::K_EXPRESSION => $term];
+
+        $expected = "(\"$value1\", \"$value2\")";
+        $actual = $subject->render($context);
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
      * Tests the render method to assert whether the literal term in the context has its value correctly aliased and
      * rendered.
      *
