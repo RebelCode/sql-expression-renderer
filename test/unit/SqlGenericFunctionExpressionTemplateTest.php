@@ -223,7 +223,7 @@ class SqlGenericFunctionExpressionTemplateTest extends TestCase
         $render2 = uniqid('render');
 
         $type = uniqid('type');
-        $prefixType = 'sql_' . $type;
+        $prefixType = TestSubject::PREFIX . $type;
         $fnType = strtoupper($type);
 
         $terms = [

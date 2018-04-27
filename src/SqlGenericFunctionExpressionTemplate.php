@@ -10,12 +10,19 @@ use Psr\Container\ContainerInterface;
  * A template that can render SQL expressions in function-argument style, in the form `OP(a, b, ...)`.
  *
  * This implementation uses the capitalized expression type as the function name, rather than being aware of an
- * operator string, ignoring any "sql_" prefixes in the type.
+ * operator string, ignoring any "sql_fn_" prefixes in the type.
  *
  * @since [*next-version*]
  */
 class SqlGenericFunctionExpressionTemplate extends AbstractBaseDelegateExpressionTemplate
 {
+    /**
+     * The prefix to trim.
+     *
+     * @since [*next-version*]
+     */
+    const PREFIX = 'sql_fn_';
+
     /**
      * Constructor.
      *
@@ -38,14 +45,15 @@ class SqlGenericFunctionExpressionTemplate extends AbstractBaseDelegateExpressio
         array $renderedTerms,
         $context = null
     ) {
-        $opStr = strtoupper($expression->getType());
+        $opStr = $expression->getType();
 
-        if (strpos($opStr, 'SQL_') === 0) {
-            $opStr = substr($opStr, 4);
+        if (stripos($opStr, static::PREFIX) === 0) {
+            $opStr = substr($opStr, strlen(static::PREFIX));
         }
 
+        $fnName  = strtoupper($opStr);
         $argsStr = implode(', ', $renderedTerms);
 
-        return sprintf('%1$s(%2$s)', $opStr, $argsStr);
+        return sprintf('%1$s(%2$s)', $fnName, $argsStr);
     }
 }
