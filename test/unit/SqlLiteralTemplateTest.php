@@ -205,6 +205,32 @@ class SqlLiteralTermTemplateTest extends TestCase
     }
 
     /**
+     * Tests the render method to assert whether the null literal term in the context is correctly rendered.
+     *
+     * @since [*next-version*]
+     */
+    public function testRenderNull()
+    {
+        $subject = $this->createInstance();
+
+        $value = null;
+
+        $term = $this->createLiteralTerm();
+        $term->method('getValue')->willReturn($value);
+
+        $context = [
+            SqlCtx::K_EXPRESSION  => $term,
+            SqlCtx::K_ALIASES_MAP => [
+            ],
+        ];
+
+        $expected = "NULL";
+        $actual = $subject->render($context);
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
      * Tests the render method with an invalid term to assert whether an exception is thrown.
      *
      * @since [*next-version*]

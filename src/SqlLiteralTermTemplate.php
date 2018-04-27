@@ -56,6 +56,10 @@ class SqlLiteralTermTemplate extends AbstractBaseSqlTermTemplate
             return sprintf('(%s)', implode(', ', $values));
         }
 
+        if ($origValue === null) {
+            return 'NULL';
+        }
+
         return $this->_renderScalarTerm($origValue, $context);
     }
 
