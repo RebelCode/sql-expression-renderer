@@ -4,7 +4,7 @@ namespace RebelCode\Expression\Renderer\Sql;
 
 use Dhii\Expression\ExpressionInterface;
 use Dhii\Expression\Renderer\AbstractBaseDelegateExpressionTemplate;
-use Psr\Container\ContainerInterface;
+use Dhii\Output\TemplateInterface;
 
 /**
  * A template that can render SQL expressions in function-argument style, in the form `OP(a, b, ...)`.
@@ -28,11 +28,11 @@ class SqlGenericFunctionExpressionTemplate extends AbstractBaseDelegateExpressio
      *
      * @since [*next-version*]
      *
-     * @param ContainerInterface $delegateTemplates The container of delegate templates, by key-type.
+     * @param TemplateInterface $delegateTemplate The delegate template.
      */
-    public function __construct(ContainerInterface $delegateTemplates)
+    public function __construct(TemplateInterface $delegateTemplate)
     {
-        $this->_setTermTypeRendererContainer($delegateTemplates);
+        $this->_setTemplate($delegateTemplate);
     }
 
     /**

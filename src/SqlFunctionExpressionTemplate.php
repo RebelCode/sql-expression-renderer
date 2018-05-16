@@ -3,8 +3,8 @@
 namespace RebelCode\Expression\Renderer\Sql;
 
 use Dhii\Expression\Renderer\AbstractBaseFunctionExpressionTemplate;
+use Dhii\Output\TemplateInterface;
 use Dhii\Util\String\StringableInterface as Stringable;
-use Psr\Container\ContainerInterface;
 
 /**
  * A template that can render SQL expressions in function-argument style, in the form `OP(a, b, ...)`.
@@ -18,12 +18,12 @@ class SqlFunctionExpressionTemplate extends AbstractBaseFunctionExpressionTempla
      *
      * @since [*next-version*]
      *
-     * @param string|Stringable  $operator          The operator string.
-     * @param ContainerInterface $delegateTemplates The container of delegate templates, by key-type.
+     * @param string|Stringable $operator         The operator string.
+     *@param TemplateInterface  $delegateTemplate The delegate template.
      */
-    public function __construct($operator, ContainerInterface $delegateTemplates)
+    public function __construct($operator, TemplateInterface $delegateTemplate)
     {
         $this->_setOperatorString($operator);
-        $this->_setTermTypeRendererContainer($delegateTemplates);
+        $this->_setTemplate($delegateTemplate);
     }
 }

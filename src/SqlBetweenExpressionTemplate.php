@@ -4,8 +4,8 @@ namespace RebelCode\Expression\Renderer\Sql;
 
 use Dhii\Expression\ExpressionInterface;
 use Dhii\Expression\Renderer\AbstractBaseDelegateExpressionTemplate;
+use Dhii\Output\TemplateInterface;
 use Dhii\Storage\Resource\Sql\Expression\SqlOperatorInterface;
-use Psr\Container\ContainerInterface;
 
 /**
  * A template for an SQL BETWEEN expression.
@@ -19,11 +19,11 @@ class SqlBetweenExpressionTemplate extends AbstractBaseDelegateExpressionTemplat
      *
      * @since [*next-version*]
      *
-     * @param ContainerInterface $delegateTemplates The container of delegate templates, by key-type.
+     * @param TemplateInterface $delegateTemplate The delegate template.
      */
-    public function __construct(ContainerInterface $delegateTemplates)
+    public function __construct(TemplateInterface $delegateTemplate)
     {
-        $this->_setTermTypeRendererContainer($delegateTemplates);
+        $this->_setTemplate($delegateTemplate);
     }
 
     /**
