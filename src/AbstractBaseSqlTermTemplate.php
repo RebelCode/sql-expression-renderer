@@ -8,6 +8,7 @@ use Dhii\Data\Container\ContainerHasCapableTrait;
 use Dhii\Expression\Renderer\AbstractBaseExpressionTemplate;
 use Dhii\Storage\Resource\Sql\Expression\SqlExpressionContextInterface as SqlCtx;
 use Psr\Container\ContainerInterface;
+use Psr\Container\ContainerExceptionInterface;
 use stdClass;
 
 /**
@@ -32,7 +33,7 @@ abstract class AbstractBaseSqlTermTemplate extends AbstractBaseExpressionTemplat
      * @param string|Stringable                             $subject The subject for which to resolve the alias.
      * @param array|ArrayAccess|stdClass|ContainerInterface $context The render context.
      *
-     * @throws \Psr\Container\ContainerExceptionInterface If an error occurred while reading from the container.
+     * @throws ContainerExceptionInterface If an error occurred while reading from the container.
      *
      * @return string|Stringable The resolved alias, or the subject if no alias was found.
      */
