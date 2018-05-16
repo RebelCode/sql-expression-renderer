@@ -14,7 +14,7 @@
     "require": {
         "php": "^5.4 | ^7.0",
         "dhii/sql-interface": "^0.1",
-        "dhii/expression-renderer-base": "dev-task/initial-classes"
+        "dhii/expression-renderer-base": "^0.1-alpha1"
     },
     "require-dev": {
         "phpunit/phpunit": "^4.8",
