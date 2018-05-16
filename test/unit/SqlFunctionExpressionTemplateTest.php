@@ -2,9 +2,9 @@
 
 namespace RebelCode\Expression\Renderer\Sql\FuncTest;
 
-use Dhii\Data\Container\Exception\NotFoundException;
 use Dhii\Expression\Renderer\ExpressionContextInterface;
 use Dhii\Expression\TermInterface;
+use Dhii\Output\TemplateInterface;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
 use RebelCode\Expression\Renderer\Sql\SqlFunctionExpressionTemplate as TestSubject;
 use Xpmock\TestCase;
@@ -63,49 +63,11 @@ class SqlFunctionExpressionTemplateTest extends TestCase
     }
 
     /**
-     * Creates a mock container instance.
-     *
-     * @since [*next-version*]
-     *
-     * @param array $data The data.
-     *
-     * @return MockObject
-     */
-    public function createContainer($data = [])
-    {
-        $mock = $this->mockClassAndInterfaces(
-            'ArrayObject',
-            [
-                'Psr\Container\ContainerInterface',
-            ]
-        );
-
-        $mock->method('get')->willReturnCallback(
-            function($key) use ($mock) {
-                if ($mock->offsetExists($key)) {
-                    return $mock->offsetGet($key);
-                }
-                throw new NotFoundException();
-            }
-        );
-
-        $mock->method('has')->willReturnCallback(
-            function($key) use ($mock) {
-                return $mock->offsetExists($key);
-            }
-        );
-
-        $mock->exchangeArray($data);
-
-        return $mock;
-    }
-
-    /**
      * Creates a mock template instance.
      *
      * @since [*next-version*]
      *
-     * @return MockObject
+     * @return MockObject|TemplateInterface
      */
     public function createTemplate()
     {
@@ -151,7 +113,7 @@ class SqlFunctionExpressionTemplateTest extends TestCase
      */
     public function testCanBeCreated()
     {
-        $subject = new TestSubject('', $this->createContainer());
+        $subject = new TestSubject('', $this->createTemplate());
 
         $this->assertInternalType(
             'object',
@@ -186,19 +148,12 @@ class SqlFunctionExpressionTemplateTest extends TestCase
             ExpressionContextInterface::K_EXPRESSION => $expression,
         ];
 
-        $template1 = $this->createTemplate();
-        $template1->method('render')->willReturn($render1);
+        $dlgTemplate = $this->createTemplate();
+        $dlgTemplate->expects($this->exactly(2))
+                    ->method('render')
+                    ->willReturnOnConsecutiveCalls($render1, $render2);
 
-        $template2 = $this->createTemplate();
-        $template2->method('render')->willReturn($render2);
-
-        $container = $this->createContainer(
-            [
-                $type1 => $template1,
-                $type2 => $template2,
-            ]
-        );
-        $subject = new TestSubject($operator, $container);
+        $subject = new TestSubject($operator, $dlgTemplate);
 
         $expected = "$operator($render1, $render2)";
         $actual = $subject->render($ctx);
