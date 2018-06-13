@@ -191,6 +191,42 @@ class SqlReferenceTemplateTest extends TestCase
     }
 
     /**
+     * Tests the render method to assert whether entity-field aliases for fields are correctly rendered.
+     *
+     * @since [*next-version*]
+     */
+    public function testRenderEntityFieldAlias()
+    {
+        $subject = $this->createInstance();
+
+        $entity = uniqid('entity');
+        $field = uniqid('field');
+
+        $entityAlias = uniqid('entity');
+        $fieldAlias = uniqid('field');
+
+        $entityFieldAlias = $this->createEntityFieldTerm();
+        $entityFieldAlias->method('getEntity')->willReturn($entityAlias);
+        $entityFieldAlias->method('getField')->willReturn($fieldAlias);
+
+        $term = $this->createEntityFieldTerm();
+        $term->method('getEntity')->willReturn($entity);
+        $term->method('getField')->willReturn($field);
+
+        $context = [
+            SqlCtx::K_EXPRESSION  => $term,
+            SqlCtx::K_ALIASES_MAP => [
+                $field  => $entityFieldAlias,
+            ],
+        ];
+
+        $expected = "`$entity`.`$fieldAlias`";
+        $actual = $subject->render($context);
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
      * Tests the render method to assert whether an exception is thrown when a non-entity field term is given.
      *
      * @since [*next-version*]
