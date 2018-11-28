@@ -3,6 +3,7 @@
 namespace RebelCode\Expression\Renderer\Sql;
 
 use ArrayAccess;
+use Dhii\Expression\ExpressionInterface;
 use Dhii\Expression\TermInterface;
 use Dhii\Expression\VariableTermInterface;
 use Dhii\Output\Exception\TemplateRenderException;
@@ -39,9 +40,10 @@ class SqlReferenceTermTemplate extends AbstractBaseSqlTermTemplate
     {
         $name  = $this->_reduceReferenceToString($expression);
         $alias = $this->_resolveSqlAliasFromContext($name, $context);
-        $alias = $this->_reduceReferenceToString($alias);
 
-        $render = sprintf('`%s`', $alias);
+        $render = ($alias instanceof ExpressionInterface)
+            ? $name
+            : sprintf('`%s`', $this->_reduceReferenceToString($alias));
 
         if ($expression instanceof EntityFieldInterface) {
             $entity = $this->_resolveSqlAliasFromContext($expression->getEntity(), $context);

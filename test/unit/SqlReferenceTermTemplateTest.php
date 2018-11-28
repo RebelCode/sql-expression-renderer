@@ -227,6 +227,33 @@ class SqlReferenceTemplateTest extends TestCase
     }
 
     /**
+     * Tests the render method to assert whether expression aliases for ignored and fields are rendered verbatim.
+     *
+     * @since [*next-version*]
+     */
+    public function testRenderEntityFieldExpressionAlias()
+    {
+        $subject = $this->createInstance();
+
+        $name = uniqid('field');
+
+        $term = $this->createVariableTerm();
+        $term->method('getKey')->willReturn($name);
+
+        $context = [
+            SqlCtx::K_EXPRESSION  => $term,
+            SqlCtx::K_ALIASES_MAP => [
+                $name  => $this->getMockForAbstractClass('Dhii\Expression\ExpressionInterface'),
+            ],
+        ];
+
+        $expected = $name;
+        $actual = $subject->render($context);
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
      * Tests the render method to assert whether an exception is thrown when a non-entity field term is given.
      *
      * @since [*next-version*]
